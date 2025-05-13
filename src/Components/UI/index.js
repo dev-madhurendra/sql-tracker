@@ -91,29 +91,16 @@ export default function SQLExerciseTracker() {
     });
   };
 
-  const validateSolution = () => {
-    if (!selectedExercise || !solution.trim()) {
-      setValidationResult({ valid: false, message: 'Please enter a solution first' });
-      return false;
-    }
-    
-    const result = validateSQL(solution, selectedExercise);
-    setValidationResult(result);
-    return result.valid;
-  };
-
   const saveSolution = () => {
-    if (validateSolution()) {
-      setSolutions(prev => ({
-        ...prev,
-        [selectedExercise.id]: solution
-      }));
-      // Also mark as completed when solution is saved and valid
-      if (!completed[selectedExercise.id]) {
-        toggleCompleted(selectedExercise.id);
-      }
-      alert('Solution saved successfully!');
+    setSolutions(prev => ({
+      ...prev,
+      [selectedExercise.id]: solution
+    }));
+    // Also mark as completed when solution is saved and valid
+    if (!completed[selectedExercise.id]) {
+      toggleCompleted(selectedExercise.id);
     }
+    alert('Solution saved successfully!');
   };
 
   const selectExercise = (exercise) => {
